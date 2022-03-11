@@ -1,8 +1,9 @@
 # BMI 203 Project 7: Neural Network
 
 # Import necessary dependencies here
-
-
+from sklearn import datasets
+from nn import preprocess
+from collections import Counter
 # TODO: Write your test functions and associated docstrings below.
 
 def test_forward():
@@ -42,4 +43,13 @@ def test_one_hot_encode():
 
 
 def test_sample_seqs():
-    pass
+    '''
+    Uses a binary class dataset to test if labels 50/50 for each class
+    '''
+    digits = datasets.load_breast_cancer()
+    X = digits.data
+    y = digits.target
+    _, balanced_labels = preprocess.sample_seqs(X, y)
+    counts = Counter(balanced_labels)
+    assert counts.most_common()[0][1] == counts.most_common()[1][1], "Not balanced!"
+
