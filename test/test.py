@@ -2,8 +2,9 @@
 
 # Import necessary dependencies here
 from sklearn import datasets
-from nn import preprocess
+from nn import preprocess, one_hot_encode_seqs 
 from collections import Counter
+import numpy as np
 # TODO: Write your test functions and associated docstrings below.
 
 def test_forward():
@@ -39,7 +40,17 @@ def test_mean_squared_error_backprop():
 
 
 def test_one_hot_encode():
-    pass
+    '''
+    Basic test for encoding
+    '''
+    s = preprocess.one_hot_encode_seqs(['A','T','C','G'])
+    true = np.array([[1, 0, 0, 0],
+                     [0, 1, 0, 0],
+                     [0, 0, 1, 0],
+                     [0, 0, 0, 1]])
+    s2 = preprocess.one_hot_encode_seqs(['AGA'])
+    true2 = np.array([1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0])
+    assert np.allclose(s2, true2) and np.allclose(s,true), "Encoding failed"
 
 
 def test_sample_seqs():
