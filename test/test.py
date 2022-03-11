@@ -2,7 +2,7 @@
 
 # Import necessary dependencies here
 from sklearn import datasets
-from nn import preprocess, one_hot_encode_seqs 
+from nn import preprocess
 from collections import Counter
 import numpy as np
 
